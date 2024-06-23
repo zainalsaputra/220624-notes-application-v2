@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: "Ubuntu", sans-serif;
+  font-family: 'Ubuntu', sans-serif;
   background-color: #ffffff3c;
   color: #eeece3;
   background-color: #f8f9fa;
@@ -40,9 +40,8 @@ note-header {
   font-size: 15px;
   text-align: center;
   margin: 0;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
-
 
 main {
   padding: 20px;
@@ -75,14 +74,14 @@ button:hover {
   grid-gap: 15px;
 }
 
-.filter>h2 {
+.filter > h2 {
   color: #007bff;
   text-align: center;
 }
 
 #filterNotes {
   font-size: 18px;
-  font-family: "Ubuntu", sans-serif;
+  font-family: 'Ubuntu', sans-serif;
   color: #232e3f;
   width: 100%;
   padding: 8px 8px;
@@ -96,7 +95,7 @@ button:hover {
   transition: transform 0.3s ease;
 }
 
-#filterNotes>option {
+#filterNotes > option {
   color: #232e3f;
   background-color: white;
 }
@@ -169,15 +168,18 @@ button:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05),
+    rgba(255, 255, 255, 0)
+  );
   backdrop-filter: blur(50px);
   -webkit-backdrop-filter: blur(50px);
   display: none;
   z-index: 9999;
 }
 
-
-.action>.button-archived {
+.action > .button-archived {
   transition: 0.2s;
   transform: translateY(5px);
   font-size: 15px;
@@ -190,7 +192,7 @@ button:hover {
   transition: background-color 0.3s ease;
 }
 
-.action>.button-unarchived {
+.action > .button-unarchived {
   transition: 0.2s;
   transform: translateY(5px);
   font-size: 15px;
@@ -203,7 +205,7 @@ button:hover {
   transition: background-color 0.3s ease;
 }
 
-.action>.button-delete {
+.action > .button-delete {
   transition: 0.2s;
   transform: translateY(5px);
   font-size: 15px;
@@ -217,19 +219,19 @@ button:hover {
   margin-left: 10px;
 }
 
-.action>.button-archived:hover {
+.action > .button-archived:hover {
   background-color: #2f3d53;
 }
 
-.action>.button-unarchived:hover {
+.action > .button-unarchived:hover {
   background-color: #2f3d53;
 }
 
-.action>.button-delete:hover {
+.action > .button-delete:hover {
   background-color: #2f3d53;
 }
 
-.action>.button-recovery-note:hover {
+.action > .button-recovery-note:hover {
   background-color: #2f3d53;
 }
 

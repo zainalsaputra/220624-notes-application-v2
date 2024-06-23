@@ -1,15 +1,17 @@
 class NoteForm extends HTMLElement {
-  _shadowRoot = null;
-  _style = null;
+  _shadowRoot = null
+  _style = null
 
   constructor() {
-    super();
+    super()
 
-    this._shadowRoot = this.attachShadow({ mode: "open" });
-    this._style = document.createElement("style");
+    this._shadowRoot = this.attachShadow({ mode: 'open' })
+    this._style = document.createElement('style')
 
-    this.customValidationTitleHandler = this.customValidationTitleHandler.bind(this);
-    this.customValidationBodyHandler = this.customValidationBodyHandler.bind(this);
+    this.customValidationTitleHandler =
+      this.customValidationTitleHandler.bind(this)
+    this.customValidationBodyHandler =
+      this.customValidationBodyHandler.bind(this)
   }
 
   _updateStyle() {
@@ -68,23 +70,23 @@ class NoteForm extends HTMLElement {
           color: red;
       }
 
-      `;
+      `
   }
 
   _emptyContent() {
-    this._shadowRoot.innerHTML = "";
+    this._shadowRoot.innerHTML = ''
   }
 
   connectedCallback() {
-    this.render();
-    this.setupEventListeners();
+    this.render()
+    this.setupEventListeners()
   }
 
   render() {
-    this._emptyContent();
-    this._updateStyle();
+    this._emptyContent()
+    this._updateStyle()
 
-    this._shadowRoot.appendChild(this._style);
+    this._shadowRoot.appendChild(this._style)
     this._shadowRoot.innerHTML += `
         <form id="noteForm" class="form-grid">
             <h2>Create Note</h2>
@@ -98,56 +100,60 @@ class NoteForm extends HTMLElement {
             <p id="bodyValidation" class="validation-message" aria-live="polite"></p>
             <input class="add-note" type="submit" value="Add Note">
         </form>
-      `;
+      `
 
-    this._shadowRoot.querySelector("#noteForm").addEventListener("submit", this.onSubmit.bind(this));
+    this._shadowRoot
+      .querySelector('#noteForm')
+      .addEventListener('submit', this.onSubmit.bind(this))
   }
 
   onSubmit(event) {
-    event.preventDefault();
-    const title = this._shadowRoot.querySelector("#title").value;
-    const body = this._shadowRoot.querySelector("#body").value;
+    event.preventDefault()
+    const title = this._shadowRoot.querySelector('#title').value
+    const body = this._shadowRoot.querySelector('#body').value
 
-    const addNoteEvent = new CustomEvent("addNote", {
+    const addNoteEvent = new CustomEvent('addNote', {
       detail: { title, body },
       bubbles: true,
       composed: true,
-    });
-    this.dispatchEvent(addNoteEvent);
+    })
+    this.dispatchEvent(addNoteEvent)
 
-    this._shadowRoot.querySelector("#title").value = "";
-    this._shadowRoot.querySelector("#body").value = "";
+    this._shadowRoot.querySelector('#title').value = ''
+    this._shadowRoot.querySelector('#body').value = ''
   }
 
   setupEventListeners() {
-    const titleInput = this._shadowRoot.querySelector("#title");
-    const bodyInput = this._shadowRoot.querySelector("#body");
+    const titleInput = this._shadowRoot.querySelector('#title')
+    const bodyInput = this._shadowRoot.querySelector('#body')
 
-    titleInput.addEventListener("input", this.customValidationTitleHandler);
-    bodyInput.addEventListener("input", this.customValidationBodyHandler);
+    titleInput.addEventListener('input', this.customValidationTitleHandler)
+    bodyInput.addEventListener('input', this.customValidationBodyHandler)
   }
 
   customValidationTitleHandler(event) {
-    const titleInput = event.target;
-    const titleValidationMessage = this._shadowRoot.querySelector("#titleValidation");
+    const titleInput = event.target
+    const titleValidationMessage =
+      this._shadowRoot.querySelector('#titleValidation')
 
     if (!titleInput.value.trim()) {
-      titleValidationMessage.innerText = "Title cannot be empty!";
+      titleValidationMessage.innerText = 'Title cannot be empty!'
     } else {
-      titleValidationMessage.innerText = "";
+      titleValidationMessage.innerText = ''
     }
   }
 
   customValidationBodyHandler(event) {
-    const bodyInput = event.target;
-    const bodyValidationMessage = this._shadowRoot.querySelector("#bodyValidation");
+    const bodyInput = event.target
+    const bodyValidationMessage =
+      this._shadowRoot.querySelector('#bodyValidation')
 
     if (!bodyInput.value.trim()) {
-      bodyValidationMessage.innerText = "Body cannot be empty!";
+      bodyValidationMessage.innerText = 'Body cannot be empty!'
     } else {
-      bodyValidationMessage.innerText = "";
+      bodyValidationMessage.innerText = ''
     }
   }
 }
 
-customElements.define("note-form", NoteForm);
+customElements.define('note-form', NoteForm)

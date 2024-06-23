@@ -2,39 +2,35 @@
 
 # Application
 
-+ Front-End : Notes Application
-+ Node Version : 20.10.0 LTS
+- Front-End : Notes Application
+- Node Version : 20.10.0 LTS
 
 # Tools
 
-+ webpack
-+ babel
-+ http server
+- webpack
+- babel
+- http server
 
 # Feature
 
-+ read note
-+ create note
-+ archive note
-+ delete note
-+ unarchive note
+- read note
+- create note
+- archive note
+- delete note
+- unarchive note
 
 # API
 
-+ [notes-app-backend](https://notes-api.dicoding.dev/v2#/)
+- [notes-app-backend](https://notes-api.dicoding.dev/v2#/)
 
 # To-do list
 
 1. Pertahankan Kriteria Submission Sebelumnya. (done)
-    
    **Optional :** Memiliki Fitur Arsip Catatan. (done)
-    
 2. Memanfaatkan RESTful API sebagai Sumber Data. (done)
-    
    **Optional :** Menampilkan Feedback Saat Terjadi Error. (done)
-    
 3. Menggunakan webpack sebagai Module Bundler. (done)
-    
-    **Optional :** Menerapkan Prettier sebagai Code Formatter. (done)
-    
+
+   **Optional :** Menerapkan Prettier sebagai Code Formatter. (done)
+
 4. Menggunakan Fetch API. (done)

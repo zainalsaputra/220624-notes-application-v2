@@ -1,19 +1,18 @@
 function main() {
-  const baseUrl = "https://notes-api.dicoding.dev/v2";
+  const baseUrl = 'https://notes-api.dicoding.dev/v2'
 
   const renderAllNotes = (notes) => {
-    const noteListElement = document.querySelector("#noteList");
-    noteListElement.innerHTML = "";
+    const noteListElement = document.querySelector('#noteList')
+    noteListElement.innerHTML = ''
 
     notes.forEach((note) => {
-      const noteItem = document.createElement("div");
-      noteItem.classList.add("note-item");
-      noteItem.setAttribute("tabindex", "0");
+      const noteItem = document.createElement('div')
+      noteItem.classList.add('note-item')
+      noteItem.setAttribute('tabindex', '0')
 
-      const noteTitle = document.createElement("h3");
-      noteTitle.classList.add("note-title");
-      noteTitle.innerText = note.title;
-
+      const noteTitle = document.createElement('h3')
+      noteTitle.classList.add('note-title')
+      noteTitle.innerText = note.title
 
       const noteDate = document.createElement('p')
       noteDate.classList.add('note-date')
@@ -32,203 +31,203 @@ function main() {
       console.log(formattedDateTime)
       noteDate.innerText = formattedDateTime
 
-      const noteBody = document.createElement("p");
-      noteBody.classList.add("note-body");
-      noteBody.innerText = note.body;
+      const noteBody = document.createElement('p')
+      noteBody.classList.add('note-body')
+      noteBody.innerText = note.body
 
-      const buttonArchived = document.createElement("button");
-      buttonArchived.setAttribute("type", "button");
-      buttonArchived.innerText = "Archive";
+      const buttonArchived = document.createElement('button')
+      buttonArchived.setAttribute('type', 'button')
+      buttonArchived.innerText = 'Archive'
 
-      const buttonTrash = document.createElement("button");
-      buttonTrash.classList.add("button-delete");
-      buttonTrash.innerText = "Delete";
+      const buttonTrash = document.createElement('button')
+      buttonTrash.classList.add('button-delete')
+      buttonTrash.innerText = 'Delete'
 
-      buttonTrash.setAttribute("type", "button");
-      buttonTrash.addEventListener("click", function () {
-        const confirmation = confirm("Are you sure??");
+      buttonTrash.setAttribute('type', 'button')
+      buttonTrash.addEventListener('click', function () {
+        const confirmation = confirm('Are you sure??')
         if (confirmation) {
-          removeNote(note.id);
+          removeNote(note.id)
         }
-      });
+      })
 
       if (note.archived) {
-        buttonArchived.classList.add("button-unarchived");
-        buttonArchived.innerText = "Unarchived";
-        buttonArchived.addEventListener("click", function () {
-          unArchiveNote(note.id);
-        });
+        buttonArchived.classList.add('button-unarchived')
+        buttonArchived.innerText = 'Unarchived'
+        buttonArchived.addEventListener('click', function () {
+          unArchiveNote(note.id)
+        })
       } else {
-        buttonArchived.classList.add("button-archived");
-        buttonArchived.addEventListener("click", function () {
-          archiveNote(note.id);
-        });
+        buttonArchived.classList.add('button-archived')
+        buttonArchived.addEventListener('click', function () {
+          archiveNote(note.id)
+        })
       }
 
-      const buttonContainer = document.createElement("div");
-      buttonContainer.classList.add("action");
-      buttonContainer.append(buttonArchived, buttonTrash);
+      const buttonContainer = document.createElement('div')
+      buttonContainer.classList.add('action')
+      buttonContainer.append(buttonArchived, buttonTrash)
 
-      noteItem.append(noteTitle, noteDate, noteBody, buttonContainer);
-      noteListElement.appendChild(noteItem);
-    });
-  };
+      noteItem.append(noteTitle, noteDate, noteBody, buttonContainer)
+      noteListElement.appendChild(noteItem)
+    })
+  }
 
   const addNote = async (note) => {
     try {
-      showLoadingSpinner();
+      showLoadingSpinner()
       const options = {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(note),
-      };
-      const response = await fetch(`${baseUrl}/notes`, options);
-      const responseJson = await response.json();
-      showResponseMessage(responseJson.message);
-      getUnArchived();
+      }
+      const response = await fetch(`${baseUrl}/notes`, options)
+      const responseJson = await response.json()
+      showResponseMessage(responseJson.message)
+      getUnArchived()
     } catch (error) {
-      showResponseMessage(error);
+      showResponseMessage(error)
     } finally {
-      hideLoadingSpinner();
+      hideLoadingSpinner()
     }
-  };
+  }
 
   const getUnArchived = async () => {
     try {
-      showLoadingSpinner();
-      const response = await fetch(`${baseUrl}/notes`);
-      const responseJson = await response.json();
+      showLoadingSpinner()
+      const response = await fetch(`${baseUrl}/notes`)
+      const responseJson = await response.json()
 
       if (responseJson.data.length > 0) {
-        renderAllNotes(responseJson.data);
+        renderAllNotes(responseJson.data)
       } else {
-        showResponseMessage("Note Empty");
-        renderAllNotes(responseJson.data);
+        showResponseMessage('Note Empty')
+        renderAllNotes(responseJson.data)
       }
     } catch (error) {
-      showResponseMessage(error);
+      showResponseMessage(error)
     } finally {
-      hideLoadingSpinner();
+      hideLoadingSpinner()
     }
-  };
+  }
 
   const getArchived = async () => {
     try {
-      showLoadingSpinner();
-      const response = await fetch(`${baseUrl}/notes/archived`);
-      const responseJson = await response.json();
+      showLoadingSpinner()
+      const response = await fetch(`${baseUrl}/notes/archived`)
+      const responseJson = await response.json()
 
       if (responseJson.data.length > 0) {
-        renderAllNotes(responseJson.data);
+        renderAllNotes(responseJson.data)
       } else {
-        showResponseMessage("Note Empty");
-        renderAllNotes(responseJson.data);
+        showResponseMessage('Note Empty')
+        renderAllNotes(responseJson.data)
       }
     } catch (error) {
-      showResponseMessage(error);
+      showResponseMessage(error)
     } finally {
-      hideLoadingSpinner();
+      hideLoadingSpinner()
     }
-  };
+  }
 
   const removeNote = (noteId) => {
-    showLoadingSpinner();
+    showLoadingSpinner()
     fetch(`${baseUrl}/notes/${noteId}`, {
-      method: "DELETE",
+      method: 'DELETE',
     })
       .then((response) => {
-        return response.json();
+        return response.json()
       })
       .then((responseJson) => {
-        showResponseMessage(responseJson.message);
+        showResponseMessage(responseJson.message)
         if (filterNotes.selectedIndex == 0) {
-          getUnArchived();
+          getUnArchived()
         } else {
-          getArchived();
+          getArchived()
         }
       })
       .catch((error) => {
-        showResponseMessage(error);
+        showResponseMessage(error)
       })
       .finally(() => {
-        hideLoadingSpinner();
-      });
-  };
+        hideLoadingSpinner()
+      })
+  }
 
   const archiveNote = async (id) => {
     try {
       const options = {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
-      };
-      const response = await fetch(`${baseUrl}/notes/${id}/archive`, options);
-      const responseJson = await response.json();
-      showResponseMessage(responseJson.message);
-      getUnArchived();
+      }
+      const response = await fetch(`${baseUrl}/notes/${id}/archive`, options)
+      const responseJson = await response.json()
+      showResponseMessage(responseJson.message)
+      getUnArchived()
     } catch (error) {
-      showResponseMessage(error);
+      showResponseMessage(error)
     }
-  };
+  }
 
   const unArchiveNote = async (id) => {
     try {
       const options = {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
-      };
-      const response = await fetch(`${baseUrl}/notes/${id}/unarchive`, options);
-      const responseJson = await response.json();
-      showResponseMessage(responseJson.message);
-      getArchived();
+      }
+      const response = await fetch(`${baseUrl}/notes/${id}/unarchive`, options)
+      const responseJson = await response.json()
+      showResponseMessage(responseJson.message)
+      getArchived()
     } catch (error) {
-      showResponseMessage(error);
+      showResponseMessage(error)
     }
-  };
+  }
 
   const showResponseMessage = (message) => {
-    alert(message);
-  };
+    alert(message)
+  }
 
-  document.addEventListener("DOMContentLoaded", () => {
-    getUnArchived();
-    filterNotes.selectedIndex = 0;
-  });
+  document.addEventListener('DOMContentLoaded', () => {
+    getUnArchived()
+    filterNotes.selectedIndex = 0
+  })
 
-  document.addEventListener("addNote", function (event) {
-    const { title, body } = event.detail;
+  document.addEventListener('addNote', function (event) {
+    const { title, body } = event.detail
 
     const newNote = {
       title: title,
       body: body,
-    };
+    }
 
-    addNote(newNote);
-    filterNotes.selectedIndex = 0;
-  });
+    addNote(newNote)
+    filterNotes.selectedIndex = 0
+  })
 
   const showLoadingSpinner = () => {
-    document.getElementById("loadingSpinner").style.display = "block";
-  };
+    document.getElementById('loadingSpinner').style.display = 'block'
+  }
 
   const hideLoadingSpinner = () => {
-    document.getElementById("loadingSpinner").style.display = "none";
-  };
+    document.getElementById('loadingSpinner').style.display = 'none'
+  }
 
-  const filterNotes = document.getElementById("filterNotes");
+  const filterNotes = document.getElementById('filterNotes')
 
-  filterNotes.addEventListener("change", function () {
+  filterNotes.addEventListener('change', function () {
     if (filterNotes.selectedIndex == 0) {
-      getUnArchived();
+      getUnArchived()
     } else {
-      getArchived();
+      getArchived()
     }
-  });
+  })
 }
 
-export default main;
+export default main
