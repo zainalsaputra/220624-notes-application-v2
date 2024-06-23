@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notes Application</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+  </head>
+
+  <body>
+    <header>
+      <note-header title="Notes Appolication"></note-header>
+    </header>
+
+    <main>
+      <div id="loadingSpinner" class="loading-spinner">
+        <div class="spinner"></div>
+      </div>
+
+      <div class="container">
+        <section class="input-section">
+          <note-form></note-form>
+        </section>
+
+        <section class="filter">
+          <filter-note></filter-note>
+        </section>
+
+        <section tabindex="0" id="noteList" class="note-list"></section>
+      </div>
+    </main>
+
+    <footer>
+      <note-footer></note-footer>
+    </footer>
+  </body>
+</html>
