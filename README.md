@@ -10,6 +10,7 @@
 - webpack
 - babel
 - http server
+- prettier formatter
 
 # Feature
 
